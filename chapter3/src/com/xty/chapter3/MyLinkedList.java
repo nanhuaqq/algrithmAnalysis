@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 public class MyLinkedList<E>{
     private int size;
 
-    private int modeCount = 0;
+    private int modCount = 0;
 
     private Node<E> firstNode;
     private Node<E> lastNode;
@@ -39,7 +39,7 @@ public class MyLinkedList<E>{
         lastNode =  new Node<E>(null,firstNode,null);
         firstNode.next = lastNode;
         size = 0;
-        modeCount++;
+        modCount++;
     }
 
     public int size(){
@@ -79,14 +79,14 @@ public class MyLinkedList<E>{
         p.pre.next = insertNode;
         p.pre = insertNode;
         size++;
-        modeCount++;
+        modCount++;
     }
 
     private E remove(Node<E> p){
         p.pre.next = p.next;
         p.next.pre = p.pre;
         size--;
-        modeCount++;
+        modCount++;
         return p.item;
     }
 
@@ -118,7 +118,7 @@ public class MyLinkedList<E>{
     private class LinkedListIterator implements java.util.Iterator<E>{
 
         private Node<E> current = firstNode.next;
-        private int expectedModCount = modeCount;
+        private int expectedModCount = modCount;
         private boolean okToRemove = false;
 
         @Override
@@ -128,7 +128,7 @@ public class MyLinkedList<E>{
 
         @Override
         public E next() {
-            if (modeCount != expectedModCount){
+            if (modCount != expectedModCount){
                 throw new ConcurrentModificationException();
             }
             if (!hasNext()){
@@ -142,7 +142,7 @@ public class MyLinkedList<E>{
 
         @Override
         public void remove() {
-            if (modeCount != expectedModCount){
+            if (modCount != expectedModCount){
                 throw new ConcurrentModificationException();
             }
             if (!okToRemove){
