@@ -53,8 +53,8 @@ public class MergeSort {
 
     public static void main(String[] args) {
         // 测试排序算法辅助函数
-        int N = 500000;
-        Integer[] sourceArray = SortTestHelper.generateRandomArray(N, 0, 1000000);
+        int N = 1000000;
+        Integer[] sourceArray = SortTestHelper.generateRandomArray(N, 0, 100000);
 
         SortTestHelper.testSort("com.xty.qq.MergeSort","sort", sourceArray);
     }
