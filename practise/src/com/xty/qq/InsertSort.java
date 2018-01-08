@@ -24,6 +24,22 @@ public class InsertSort {
         }
     }
 
+    public static <T extends Comparable<T>> void insertPartSortTest(Comparable<T> [] arr){
+        insertPartSort(arr,0,arr.length -1);
+    }
+
+    public static <T extends Comparable<T>> void insertPartSort(Comparable<T> [] arr,int l, int r){
+        assert l >= 0 && l <= r && r < arr.length;
+
+        for( int i = l ; i <= r ; i ++ ){
+            Comparable e = arr[i];
+            int j = i;
+            for(; j > l && arr[j-1].compareTo((T) e) > 0 ; j--)
+                arr[j] = arr[j-1];
+            arr[j] = e;
+        }
+    }
+
     public static<T extends Comparable<T>> void betterInsertSort(Comparable[] arr){
         if (arr == null){
             throw new NullPointerException();
@@ -55,8 +71,8 @@ public class InsertSort {
 
     public static void main(String[] args) {
         // 测试排序算法辅助函数
-        int N = 20000;
-        Integer[] sourceArray = SortTestHelper.generateRandomArray(N, 0, 100000);
+        int N = 200000;
+        Integer[] sourceArray = SortTestHelper.generateRandomArray(N, 0, 1000000);
 //        SortTestHelper.testSort("com.xty.qq.InsertSort", sourceArray);
 
         SortTestHelper.testSort("com.xty.qq.InsertSort","betterInsertSort", sourceArray);

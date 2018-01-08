@@ -16,14 +16,16 @@ public class MergeSort {
     }
 
     public static <T extends Comparable<T>> void sort(Comparable<T>[] arr, int l, int r) {
-        if (l >= r) {
+        if (l >= r){
             return;
         }
 
         int mid = (l + r) / 2;
         sort(arr, l, mid);
         sort(arr, mid + 1, r);
-        merge(arr, l, mid, r);
+        if (arr[mid].compareTo((T) arr[mid+1]) > 0){
+            merge(arr, l, mid, r);
+        }
     }
 
     public static <T extends Comparable<T>> void merge(Comparable<T>[] arr, int l, int mid, int r) {
@@ -51,8 +53,8 @@ public class MergeSort {
 
     public static void main(String[] args) {
         // 测试排序算法辅助函数
-        int N = 200000;
-        Integer[] sourceArray = SortTestHelper.generateRandomArray(N, 0, 100000);
+        int N = 500000;
+        Integer[] sourceArray = SortTestHelper.generateRandomArray(N, 0, 1000000);
 
         SortTestHelper.testSort("com.xty.qq.MergeSort","sort", sourceArray);
     }
