@@ -5,7 +5,7 @@ package com.xty.qq;
  */
 public class SelectionSort {
 
-    public static void selectionSort(int[] sourceArray){
+    public static<T extends Comparable<T>> void sort(T[]  sourceArray){
         if (sourceArray ==  null || sourceArray.length <= 1){
             return;
         }
@@ -14,7 +14,7 @@ public class SelectionSort {
 
             int minIndex = i;
             for (int j = i; j < len; j++) {
-                if (sourceArray[j] < sourceArray[minIndex]){
+                if (sourceArray[j].compareTo(sourceArray[minIndex]) < 0){
                     minIndex = j;
                 }
             }
@@ -22,7 +22,7 @@ public class SelectionSort {
         }
     }
 
-    public  static  void swap(int [] sourceArray, int i, int j){
+    public  static  void swap(Object[] sourceArray, int i, int j){
         if (sourceArray == null){
             throw new NullPointerException();
         }
@@ -35,18 +35,15 @@ public class SelectionSort {
             return;
         }
 
-        int temp = sourceArray[i];
+        Object temp = sourceArray[i];
         sourceArray[i] = sourceArray[j];
         sourceArray[j] = temp;
     }
 
     public static void main(String[] args) {
-        int [] sourceArray = {10,9,8,7,6,5,4,3,2,1};
-        selectionSort(sourceArray);
-
-        for (int num :
-                sourceArray) {
-            System.out.println(num);
-        }
+        // 测试排序算法辅助函数
+        int N = 20000;
+        Integer[] sourceArray = SortTestHelper.generateRandomArray(N, 0, 100000);
+        SortTestHelper.testSort("com.xty.qq.SelectionSort", sourceArray);
     }
 }
