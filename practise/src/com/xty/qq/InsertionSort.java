@@ -22,6 +22,21 @@ public class InsertionSort{
         }
     }
 
+    public static void sortR(Comparable[] arr) {
+        int n = arr.length;
+        //升序排列
+        for (int i = 1; i < n; i++) {
+            Comparable e = arr[i];
+            int j = i;
+            for (;  j > 0 ; j--) {
+                if (arr[i].compareTo(arr[j - 1]) < 0) {
+                    arr[j] = arr[j - 1];
+                }
+            }
+            arr[j] = e;
+        }
+    }
+
     // 对arr[l...r]的区间使用InsertionSort排序
     public static void sort(Comparable[] arr, int l, int r){
 
